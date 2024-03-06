@@ -1,0 +1,4 @@
+RESTful_API_venv
+db.sqlite3
+*.log
+.DS_Store
