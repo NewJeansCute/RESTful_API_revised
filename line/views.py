@@ -8,6 +8,18 @@ from .models import User, Message
 
 
 class Line_User(View):
+    def get(self, request):
+        # query message from MongoDB
+
+        user_id = request.GET.get("user_id", None)
+
+        if user_id:
+            message_list = [message.to_dict() for message in Message.objects(user_id=user_id)]
+
+            return JsonResponse({"message_list": message_list})
+        else:
+            return HttpResponseBadRequest("Please enter an User ID.")
+
     def post(self, request):
         # user send message to LINE bot
 
