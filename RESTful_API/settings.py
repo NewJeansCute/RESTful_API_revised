@@ -122,3 +122,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LINE_CHANNEL_SECRET ='0eb65a92cd0e4271eac96892bf0ffe62'
+LINE_CHANNEL_ACCESS_TOKEN = 'RI1ww+G8khCvy9bk8Mn14knN1zvXnj/Te9LSvkc4DxvKYYHKaI2wAnc0KHh8fDMR7Gn9zui0MmGonT4wFSZrw1wCcT9fshPp6Rt9f5KUNV6DRvXHdVjjubaIekJvtuAGClgvtS6Tf+CJ1LhKF+JKzwdB04t89/1O/w1cDnyilFU='
