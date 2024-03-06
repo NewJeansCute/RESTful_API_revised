@@ -1,7 +1,8 @@
 import json
+import requests
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from linebot import LineBotApi
 from .models import User, Message
 
@@ -51,3 +52,36 @@ class Line_User(View):
             return HttpResponse()
         except:
             return HttpResponseBadRequest({"Something went wrong."})
+
+
+class Send_Message(View):
+    def __init__(self):
+        self.access_token = settings.LINE_CHANNEL_ACCESS_TOKEN
+
+    def post(self, request):
+        # LINE bot send message to users
+
+        params = json.loads(request.body)
+        user_id = params.get("user_id")
+        text = params.get("text")
+
+        url = "https://api.line.me/v2/bot/message/push"
+        authorization = f"Bearer {self.access_token}"
+        headers = {"Content-Type": "application/json", "Authorization": authorization}
+
+        try:
+            body = {
+                "to": user_id,
+                "messages": [
+                    {
+                        "type": "text",
+                        "text": text
+                    }
+                ]
+            }
+
+            requests.post(url, headers=headers, data=json.dumps(body).encode("utf-8"))
+
+            return JsonResponse({"result": "Message has been sent."})
+        except:
+            return HttpResponseBadRequest("Something went wrong.")
